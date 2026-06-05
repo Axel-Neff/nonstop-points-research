@@ -79,7 +79,8 @@
   .cover h1 span { color: #90cdf4; }
   .cover-subtitle {
     font-size: 1.25rem;
-    opacity: 0.85;
+    opacity: 1;
+    color: #e2e8f0;
     max-width: 700px;
     margin: 0 auto 40px;
     font-weight: 300;
@@ -471,7 +472,7 @@
     </div>
 
     <h3>1.1 Who They Are</h3>
-    <p>The &#34;New to Rewards&#34; customer is not the unbanked population living paycheck-to-paycheck. They are the <strong>debit-preferred, credit-averse middle class</strong>, a behavioral cohort, not an economic underclass. These are consumers who could likely qualify for entry-level credit cards but actively choose not to carry them, driven by a generational shift in attitudes toward debt rather than by financial exclusion. Understanding this distinction is critical because it changes the product-market fit argument entirely: these consumers have discretionary spending power, they travel regularly, and they are actively seeking financial tools that align with their values, they simply haven&#39;t been offered a rewards product that respects their preference for debit.</p>
+    <p>The &#34;<strong>New to Rewards</strong>&#34; customer is not the unbanked population living paycheck-to-paycheck. They are the <strong>debit-preferred, credit-averse middle class</strong>, a behavioral cohort, not an economic underclass. These are consumers who could likely qualify for entry-level credit cards but actively choose not to carry them, driven by a generational shift in attitudes toward debt rather than by financial exclusion. Understanding this distinction is critical because it changes the product-market fit argument entirely: these consumers have discretionary spending power, they travel regularly, and they are actively seeking financial tools that align with their values, they simply haven&#39;t been offered a rewards product that respects their preference for debit.</p>
 
     <div class="table-wrap">
       <table>
@@ -545,10 +546,76 @@
 
     <p>Only <strong>28% of middle-income travelers</strong> reported not staying in a hotel in the past year, compared to <strong>46% of lower-income travelers</strong> and <strong>16% of high-income travelers</strong>. Among all travelers surveyed by Barclays, <strong>75% expect to stay at a hotel</strong> as their top choice of lodging. The hotel preference is remarkably consistent across income levels, what changes is the <em>quality</em> and <em>price point</em> of the hotel, not the fundamental behavior of staying in one.</p>
 
+    
+    <div style="margin: 40px auto 20px; max-width: 600px;">
+      <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="300" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">Budget Airline Passengers Stay in Hotels</text>
+        <text x="300" y="44" text-anchor="middle" font-size="11" fill="#718096">Accommodation behavior by income bracket</text>
+        <!-- Bars -->
+        <g transform="translate(80, 70)">
+          <text x="0" y="15" font-size="11" fill="#4a5568" font-weight="600">Under $50k</text>
+          <rect x="140" y="0" width="168" height="28" rx="4" fill="#ed8936" opacity="0.8"/>
+          <text x="316" y="19" font-size="11" fill="#4a5568" font-weight="600">42% didn't stay in hotel</text>
+          <text x="0" y="60" font-size="11" fill="#4a5568" font-weight="600">$50k-$100k</text>
+          <rect x="140" y="45" width="112" height="28" rx="4" fill="#e53e3e" opacity="0.8"/>
+          <text x="260" y="64" font-size="11" fill="#4a5568" font-weight="600">28% didn't stay in hotel</text>
+          <text x="0" y="105" font-size="11" fill="#4a5568" font-weight="600">Over $100k</text>
+          <rect x="140" y="90" width="64" height="28" rx="4" fill="#48bb78" opacity="0.8"/>
+          <text x="212" y="109" font-size="11" fill="#4a5568" font-weight="600">16% didn't stay in hotel</text>
+        </g>
+        <rect x="40" y="210" width="520" height="50" rx="8" fill="#f7fafc" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="300" y="232" text-anchor="middle" font-size="11" fill="#2d3748" font-weight="600">72% of middle-income travelers DO stay in hotels.</text>
+        <text x="300" y="250" text-anchor="middle" font-size="11" fill="#718096">Allegiant builds its business model around packaging flights + hotels together.</text>
+      </svg>
+    </div>
+
     <h3>2.3 Airlines They Fly and Destination Patterns</h3>
     <p>These are not business travelers locking in the same Newark-to-Chicago route every week, they are <strong>leisure travelers seeking variety, chasing low fares to vacation destinations</strong>, and making booking decisions based on price and convenience rather than loyalty to a single carrier. Frontier&#39;s network is concentrated in the Western US, Southeastern US, and Caribbean/Mexico, with its Denver hub accounting for roughly <strong>30% of total capacity</strong>. Allegiant&#39;s network connects <strong>secondary and smaller markets</strong> to sun destinations like Las Vegas, Orlando, Phoenix, Tampa, and Nashville with flights operating <strong>2–4 times weekly</strong> to match weekend and holiday demand.</p>
 
     <p>This leisure-route concentration has two critical implications for a transferable points product. First, these travelers are <strong>not locked into a single airline&#39;s route network</strong>, they fly Frontier to Denver, Allegiant to Vegas, Southwest to visit family. A single-program debit card is of limited value to a customer whose next trip might be on a completely different airline. Second, the <strong>high ancillary spend per passenger</strong> on budget airlines ($60–$90 per passenger on bag fees, seat selection, priority boarding, and in-flight purchases) represents a massive unmonetized rewards opportunity. Every one of these transactions currently earns zero points for the debit-preferred customer.</p>
+
+    
+    <div style="margin: 40px auto 20px; max-width: 650px;">
+      <svg viewBox="0 0 650 250" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="325" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">Where Budget Airline Passengers Fly</text>
+        <!-- Frontier -->
+        <g transform="translate(20, 50)">
+          <rect x="0" y="0" width="190" height="180" rx="10" fill="#1a365d"/>
+          <text x="95" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Frontier</text>
+          <text x="95" y="48" text-anchor="middle" font-size="10" fill="#90cdf4">33M passengers</text>
+          <line x1="20" y1="58" x2="170" y2="58" stroke="rgba(255,255,255,0.15)"/>
+          <text x="95" y="80" text-anchor="middle" font-size="10" fill="#a0aec0">Denver hub (30% capacity)</text>
+          <text x="95" y="98" text-anchor="middle" font-size="10" fill="#a0aec0">Western &amp; Southeast US</text>
+          <text x="95" y="116" text-anchor="middle" font-size="10" fill="#a0aec0">Caribbean &amp; Mexico</text>
+          <rect x="20" y="132" width="150" height="24" rx="12" fill="rgba(255,255,255,0.1)"/>
+          <text x="95" y="149" text-anchor="middle" font-size="10" fill="#90cdf4" font-weight="600">Avg fare: $58</text>
+        </g>
+        <!-- Allegiant -->
+        <g transform="translate(230, 50)">
+          <rect x="0" y="0" width="190" height="180" rx="10" fill="#1a365d"/>
+          <text x="95" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Allegiant</text>
+          <text x="95" y="48" text-anchor="middle" font-size="10" fill="#90cdf4">18M loyalty members</text>
+          <line x1="20" y1="58" x2="170" y2="58" stroke="rgba(255,255,255,0.15)"/>
+          <text x="95" y="80" text-anchor="middle" font-size="10" fill="#a0aec0">Secondary cities only</text>
+          <text x="95" y="98" text-anchor="middle" font-size="10" fill="#a0aec0">Florida, Las Vegas</text>
+          <text x="95" y="116" text-anchor="middle" font-size="10" fill="#a0aec0">2-4 flights/week per route</text>
+          <rect x="20" y="132" width="150" height="24" rx="12" fill="rgba(255,255,255,0.1)"/>
+          <text x="95" y="149" text-anchor="middle" font-size="10" fill="#90cdf4" font-weight="600">95% leisure</text>
+        </g>
+        <!-- Southwest -->
+        <g transform="translate(440, 50)">
+          <rect x="0" y="0" width="190" height="180" rx="10" fill="#1a365d"/>
+          <text x="95" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Southwest</text>
+          <text x="95" y="48" text-anchor="middle" font-size="10" fill="#90cdf4">140M+ customers</text>
+          <line x1="20" y1="58" x2="170" y2="58" stroke="rgba(255,255,255,0.15)"/>
+          <text x="95" y="80" text-anchor="middle" font-size="10" fill="#a0aec0">Nationwide point-to-point</text>
+          <text x="95" y="98" text-anchor="middle" font-size="10" fill="#a0aec0">Domestic vacation cities</text>
+          <text x="95" y="116" text-anchor="middle" font-size="10" fill="#a0aec0">~80% leisure travelers</text>
+          <rect x="20" y="132" width="150" height="24" rx="12" fill="rgba(255,255,255,0.1)"/>
+          <text x="95" y="149" text-anchor="middle" font-size="10" fill="#90cdf4" font-weight="600">Bags fly free</text>
+        </g>
+      </svg>
+    </div>
 
     <h3>2.4 Travel as Non-Negotiable Spending</h3>
     <p>The Caravelo <em>State of Travel Subscriptions 2026</em> report, drawing on over 600,000 subscription-powered flights across 200,000+ travelers, confirms a behavioral shift that matters here: younger travelers don't treat flights as a luxury. They treat them as a recurring budget line.</p>
@@ -556,6 +623,37 @@
     <p>Roughly half of Gen Z and millennial travelers consider travel spending non-negotiable, ranking it alongside rent and groceries. Three out of four say they will travel significantly more than older generations. This reframes the demand question entirely. The target customer isn't someone who might fly once they have rewards. They're already flying. They're already spending. They're earning nothing for it.</p>
 
     <p>The booking experience itself shows how broken the status quo is. US travelers now visit <strong>277 web pages</strong> before booking a trip (flight, hotel, and extras combined), up from just 38 in 2013 (Caravelo 2026, citing Expedia Group). 72% of travelers abandon the booking process because they feel overwhelmed. A single rewards ecosystem with simplified booking is exactly what this generation is asking for.</p>
+
+  
+    <div style="margin: 40px auto 20px; max-width: 600px;">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="300" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">Travel Booking Is Broken</text>
+        <!-- Left stat -->
+        <g transform="translate(30, 50)">
+          <rect x="0" y="0" width="160" height="130" rx="10" fill="#1a365d"/>
+          <text x="80" y="40" text-anchor="middle" font-size="10" fill="#90cdf4" font-weight="600">PAGES VISITED PER TRIP</text>
+          <text x="40" y="85" text-anchor="middle" font-size="32" font-weight="800" fill="#718096">38</text>
+          <text x="40" y="102" text-anchor="middle" font-size="9" fill="#a0aec0">2013</text>
+          <text x="90" y="80" text-anchor="middle" font-size="16" fill="#a0aec0">&#x2192;</text>
+          <text x="125" y="85" text-anchor="middle" font-size="32" font-weight="800" fill="#ffffff">277</text>
+          <text x="125" y="102" text-anchor="middle" font-size="9" fill="#90cdf4">2023 (US)</text>
+        </g>
+        <!-- Middle stat -->
+        <g transform="translate(220, 50)">
+          <rect x="0" y="0" width="160" height="130" rx="10" fill="#e53e3e"/>
+          <text x="80" y="40" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)" font-weight="600">ABANDON BOOKING</text>
+          <text x="80" y="85" text-anchor="middle" font-size="42" font-weight="800" fill="#ffffff">72%</text>
+          <text x="80" y="108" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">feel overwhelmed</text>
+        </g>
+        <!-- Right stat -->
+        <g transform="translate(410, 50)">
+          <rect x="0" y="0" width="160" height="130" rx="10" fill="#48bb78"/>
+          <text x="80" y="40" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)" font-weight="600">GEN Z / MILLENNIALS</text>
+          <text x="80" y="85" text-anchor="middle" font-size="42" font-weight="800" fill="#ffffff">~50%</text>
+          <text x="80" y="108" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">call travel non-negotiable</text>
+        </g>
+      </svg>
+    </div>
 
   </div>
 </section>
@@ -606,6 +704,34 @@
     <p>Millennials are the most rewards-obsessed generation in the survey data, and they are also the core demographic of the debit-preferred traveler. Among millennial cardholders, <strong>74% make every or some effort to maximize credit card rewards</strong>, the highest of any generation. <strong>72% of millennials use rewards-focused methods to stretch their travel budgets</strong>, and <strong>94% strategically use techniques to earn more points</strong>. The problem is not lack of interest; it&#39;s lack of access.</p>
   </div>
 </section>
+
+
+
+    <div style="margin: 40px auto 20px; max-width: 600px;">
+      <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="300" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">Yes, They Want Travel Rewards</text>
+        <g transform="translate(20, 50)">
+          <!-- Bar 1 -->
+          <text x="0" y="15" font-size="10" fill="#4a5568" font-weight="600">Can't imagine trips without rewards</text>
+          <rect x="240" y="0" width="304" height="24" rx="4" fill="#2c5282"/>
+          <text x="552" y="17" font-size="11" fill="#ffffff" font-weight="700" x="394" text-anchor="middle">76%</text>
+          <!-- Bar 2 -->
+          <text x="0" y="55" font-size="10" fill="#4a5568" font-weight="600">Millennials need rewards to travel</text>
+          <rect x="240" y="40" width="352" height="24" rx="4" fill="#e53e3e"/>
+          <text x="552" y="57" font-size="11" fill="#ffffff" font-weight="700" x="418" text-anchor="middle">88%</text>
+          <!-- Bar 3 -->
+          <text x="0" y="95" font-size="10" fill="#4a5568" font-weight="600">Gen Z redeem for travel (highest gen)</text>
+          <rect x="240" y="80" width="292" height="24" rx="4" fill="#ed8936"/>
+          <text x="552" y="97" font-size="11" fill="#ffffff" font-weight="700" x="388" text-anchor="middle">73%</text>
+          <!-- Bar 4 -->
+          <text x="0" y="135" font-size="10" fill="#4a5568" font-weight="600">Rewards inspire more travel</text>
+          <rect x="240" y="120" width="184" height="24" rx="4" fill="#319795"/>
+          <text x="432" y="137" font-size="11" fill="#ffffff" font-weight="700" x="334" text-anchor="middle">46%</text>
+        </g>
+        <rect x="40" y="190" width="520" height="24" rx="4" fill="#f7fafc"/>
+        <text x="300" y="207" text-anchor="middle" font-size="10" fill="#718096" font-style="italic">Sources: Barclays 2025, The Points Guy 2024</text>
+      </svg>
+    </div>
 
 
 <!-- SECTION: THE LOYALTY CRISIS -->
@@ -727,6 +853,46 @@
 
     <p>The second group gives the first group confidence. If power users who understand points deeply choose to carry the NonStop card, that signals credibility to first-time rewards earners. And the mass market's transaction volume funds the interchange economics that make the whole thing work.</p>
 
+    
+    <div style="margin: 40px auto 20px; max-width: 650px;">
+      <svg viewBox="0 0 650 340" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="325" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">One Product, Two Audiences</text>
+        <!-- Left: Mass Market -->
+        <g transform="translate(20, 50)">
+          <rect x="0" y="0" width="280" height="200" rx="10" fill="#1a365d"/>
+          <text x="140" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#90cdf4">CUSTOMER 1: MASS MARKET</text>
+          <line x1="30" y1="42" x2="250" y2="42" stroke="rgba(255,255,255,0.15)"/>
+          <text x="140" y="72" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">120M</text>
+          <text x="140" y="92" text-anchor="middle" font-size="11" fill="#a0aec0">debit-preferred adults</text>
+          <text x="140" y="120" text-anchor="middle" font-size="11" fill="#ffffff">$5T annual spend, $0 rewards</text>
+          <text x="140" y="140" text-anchor="middle" font-size="11" fill="#ffffff">No credit check needed</text>
+          <text x="140" y="160" text-anchor="middle" font-size="11" fill="#ffffff">Simple: swipe, earn, transfer</text>
+          <rect x="40" y="172" width="200" height="20" rx="10" fill="rgba(255,255,255,0.1)"/>
+          <text x="140" y="186" text-anchor="middle" font-size="10" fill="#90cdf4" font-weight="600">The volume engine</text>
+        </g>
+        <!-- Right: Savvy Traveler -->
+        <g transform="translate(350, 50)">
+          <rect x="0" y="0" width="280" height="200" rx="10" fill="#1a1a2e"/>
+          <text x="140" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#ed8936">CUSTOMER 2: SAVVY TRAVELER</text>
+          <line x1="30" y1="42" x2="250" y2="42" stroke="rgba(255,255,255,0.15)"/>
+          <text x="140" y="72" text-anchor="middle" font-size="16" font-weight="800" fill="#ffffff">$30-$80/mo</text>
+          <text x="140" y="92" text-anchor="middle" font-size="11" fill="#a0aec0">on award tools already</text>
+          <text x="140" y="120" text-anchor="middle" font-size="11" fill="#ffffff">Seats.aero, AwardWallet, etc.</text>
+          <text x="140" y="140" text-anchor="middle" font-size="11" fill="#ffffff">Schwab debit (zero rewards)</text>
+          <text x="140" y="160" text-anchor="middle" font-size="11" fill="#ffffff">Premium tier: tools + points</text>
+          <rect x="40" y="172" width="200" height="20" rx="10" fill="rgba(255,255,255,0.1)"/>
+          <text x="140" y="186" text-anchor="middle" font-size="10" fill="#ed8936" font-weight="600">The credibility signal</text>
+        </g>
+        <!-- Bottom: Reinforcing -->
+        <g transform="translate(0, 270)">
+          <line x1="160" y1="0" x2="325" y2="30" stroke="#48bb78" stroke-width="2" opacity="0.5"/>
+          <line x1="490" y1="0" x2="325" y2="30" stroke="#48bb78" stroke-width="2" opacity="0.5"/>
+          <rect x="225" y="20" width="200" height="36" rx="18" fill="#48bb78" opacity="0.15"/>
+          <text x="325" y="43" text-anchor="middle" font-size="11" font-weight="700" fill="#276749">Reinforcing flywheel</text>
+        </g>
+      </svg>
+    </div>
+
     <div class="pull-stat">
       <div class="big-num">2/3</div>
       <div class="stat-desc"><strong>Of flight subscription travelers are under 45</strong> (Caravelo 2026). Subscriptions attract the high-value generation that traditional loyalty programs have lost.</div>
@@ -748,6 +914,48 @@
 
     <div class="highlight-box">
       <p>💡 <strong>The NonStop Value Proposition:</strong> A customer earning &#34;Universal Points&#34; on everyday debit spending could transfer those points to Southwest for a domestic flight, to Wyndham for a hotel stay, to United for an international trip, or to any other partner in the network, all from a <strong>single debit card and a single points balance</strong>. This is not a marginal improvement over the 2025 debit card launches; it is a <strong>category-defining differentiation</strong>.</p>
+    </div>
+
+    
+    <div style="margin: 40px auto 20px; max-width: 650px;">
+      <svg viewBox="0 0 650 260" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="325" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">The Single-Program Trap vs. Universal Points</text>
+        <!-- Fragmented side -->
+        <g transform="translate(20, 50)">
+          <text x="130" y="0" text-anchor="middle" font-size="11" font-weight="600" fill="#e53e3e">TODAY: 3 CARDS, 3 BALANCES</text>
+          <rect x="0" y="14" width="85" height="70" rx="6" fill="#e53e3e" opacity="0.15" stroke="#e53e3e" stroke-width="1"/>
+          <text x="42" y="40" text-anchor="middle" font-size="9" fill="#e53e3e" font-weight="600">Southwest</text>
+          <text x="42" y="55" text-anchor="middle" font-size="14" font-weight="800" fill="#e53e3e">2,100</text>
+          <text x="42" y="70" text-anchor="middle" font-size="8" fill="#718096">Rapid Rewards</text>
+          <rect x="95" y="14" width="85" height="70" rx="6" fill="#ed8936" opacity="0.15" stroke="#ed8936" stroke-width="1"/>
+          <text x="137" y="40" text-anchor="middle" font-size="9" fill="#ed8936" font-weight="600">United</text>
+          <text x="137" y="55" text-anchor="middle" font-size="14" font-weight="800" fill="#ed8936">1,800</text>
+          <text x="137" y="70" text-anchor="middle" font-size="8" fill="#718096">MileagePlus</text>
+          <rect x="190" y="14" width="85" height="70" rx="6" fill="#805ad5" opacity="0.15" stroke="#805ad5" stroke-width="1"/>
+          <text x="232" y="40" text-anchor="middle" font-size="9" fill="#805ad5" font-weight="600">Wyndham</text>
+          <text x="232" y="55" text-anchor="middle" font-size="14" font-weight="800" fill="#805ad5">900</text>
+          <text x="232" y="70" text-anchor="middle" font-size="8" fill="#718096">Wyndham Pts</text>
+          <text x="130" y="110" text-anchor="middle" font-size="10" fill="#718096">None enough for a free flight.</text>
+          <text x="130" y="125" text-anchor="middle" font-size="10" fill="#718096">Three wallets. Three apps. Zero flexibility.</text>
+        </g>
+        <!-- Arrow -->
+        <g transform="translate(310, 75)">
+          <text x="15" y="15" font-size="24" fill="#48bb78">&#x2192;</text>
+        </g>
+        <!-- Unified side -->
+        <g transform="translate(360, 50)">
+          <text x="130" y="0" text-anchor="middle" font-size="11" font-weight="600" fill="#48bb78">NONSTOP: 1 CARD, 1 BALANCE</text>
+          <rect x="30" y="14" width="200" height="70" rx="6" fill="#48bb78" opacity="0.12" stroke="#48bb78" stroke-width="1.5"/>
+          <text x="130" y="38" text-anchor="middle" font-size="10" fill="#276749" font-weight="600">Universal Points</text>
+          <text x="130" y="58" text-anchor="middle" font-size="22" font-weight="800" fill="#276749">4,800</text>
+          <text x="130" y="74" text-anchor="middle" font-size="9" fill="#48bb78">Transfer to any partner</text>
+          <text x="130" y="110" text-anchor="middle" font-size="10" fill="#2d3748" font-weight="600">Enough for a domestic flight.</text>
+          <text x="130" y="125" text-anchor="middle" font-size="10" fill="#2d3748">One wallet. 15+ partners. Full flexibility.</text>
+        </g>
+        <!-- Bottom -->
+        <rect x="50" y="200" width="550" height="40" rx="8" fill="#1a365d"/>
+        <text x="325" y="225" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="600">Same spending. Triple the value. One card instead of three.</text>
+      </svg>
     </div>
 
     <h3>9.2 The Bilt Parallel: Transferable Points for Non-Traditional Spend</h3>
@@ -904,6 +1112,32 @@
 </section>
 
 <!-- SECTION 8: VC REBUTTALS -->
+
+    <div style="margin: 40px auto 20px; max-width: 600px;">
+      <svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="300" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">Gen Z and Millennials Want Loyalty, Just Not This Kind</text>
+        <!-- Left: Enrolled -->
+        <g transform="translate(30, 55)">
+          <rect x="0" y="0" width="250" height="150" rx="10" fill="#2c5282"/>
+          <text x="125" y="28" text-anchor="middle" font-size="10" fill="#90cdf4" font-weight="600">ENROLLED IN LOYALTY PROGRAMS</text>
+          <text x="125" y="72" text-anchor="middle" font-size="48" font-weight="800" fill="#ffffff">75%</text>
+          <text x="125" y="95" text-anchor="middle" font-size="11" fill="#90cdf4">of Gen Z travelers</text>
+          <text x="125" y="120" text-anchor="middle" font-size="11" fill="#a0aec0">60% say loyalty is essential</text>
+          <text x="125" y="138" text-anchor="middle" font-size="11" fill="#a0aec0">when booking travel</text>
+        </g>
+        <!-- Right: But... -->
+        <g transform="translate(320, 55)">
+          <rect x="0" y="0" width="250" height="150" rx="10" fill="#e53e3e"/>
+          <text x="125" y="28" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)" font-weight="600">BUT CAN'T EARN ON DEBIT</text>
+          <text x="125" y="72" text-anchor="middle" font-size="48" font-weight="800" fill="#ffffff">56%</text>
+          <text x="125" y="95" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">of Gen Z never use credit</text>
+          <text x="125" y="120" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.7)">They want the rewards.</text>
+          <text x="125" y="138" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.7)">They just can't access them.</text>
+        </g>
+      </svg>
+    </div>
+
+
 <section id="vc-rebuttals">
   <div class="container">
     <div class="section-header">
@@ -949,16 +1183,41 @@
   <div class="container">
     <div class="section-header">
       <div class="section-number">11</div>
-      <h2>Strategic Positioning: Why &#34;New to Rewards&#34; Is the Right First Segment</h2>
+      <h2>Strategic Positioning: Why &#34;<strong>New to Rewards</strong>&#34; Is the Right First Segment</h2>
     </div>
 
     <h3>11.1 Lowest Cost to Acquire</h3>
-    <p>The &#34;New to Rewards&#34; customer (Segment 1) represents the lowest customer acquisition cost (CAC) for NonStop Points because they have <strong>no existing loyalty program relationships</strong> to displace. Unlike premium credit card users who are already enrolled in Chase Ultimate Rewards, Amex Membership Rewards, or airline-specific programs, the debit-preferred traveler is a loyalty &#34;blank slate.&#34; They are not being asked to switch from a competing product; they are being offered a product where none previously existed. This is the same acquisition dynamic that powered Chime&#39;s growth: neobank customers weren&#39;t switching from Chase, they were opening their first digital bank account.</p>
+    <p>The &#34;<strong>New to Rewards</strong>&#34; customer (Segment 1) represents the lowest customer acquisition cost (CAC) for NonStop Points because they have <strong>no existing loyalty program relationships</strong> to displace. Unlike premium credit card users who are already enrolled in Chase Ultimate Rewards, Amex Membership Rewards, or airline-specific programs, the debit-preferred traveler is a loyalty &#34;blank slate.&#34; They are not being asked to switch from a competing product; they are being offered a product where none previously existed. This is the same acquisition dynamic that powered Chime&#39;s growth: neobank customers weren&#39;t switching from Chase, they were opening their first digital bank account.</p>
 
     <p>The marketing channels for this segment are also highly efficient. Budget airlines&#39; own customer bases, <strong>18 million Allways Rewards members at Allegiant, millions of Rapid Rewards members at Southwest, 33 million Frontier passengers</strong>, represent a captive audience of pre-qualified prospects who are already enrolled in a single-program loyalty system and would benefit from a multi-program alternative. These airlines have a direct relationship with the customer through email, mobile apps, and the booking experience, providing low-cost distribution channels.</p>
 
+    
+    <div style="margin: 40px auto 20px; max-width: 600px;">
+      <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="300" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">Customer Acquisition Cost: No Loyalty to Displace</text>
+        <!-- Premium credit CAC -->
+        <g transform="translate(30, 55)">
+          <rect x="0" y="0" width="250" height="140" rx="10" fill="#e53e3e" opacity="0.1" stroke="#e53e3e" stroke-width="1.5"/>
+          <text x="125" y="28" text-anchor="middle" font-size="10" fill="#e53e3e" font-weight="600">PREMIUM CREDIT CARD CAC</text>
+          <text x="125" y="72" text-anchor="middle" font-size="36" font-weight="800" fill="#e53e3e">$600-$1,200</text>
+          <text x="125" y="98" text-anchor="middle" font-size="10" fill="#718096">Must displace Chase, Amex, etc.</text>
+          <text x="125" y="115" text-anchor="middle" font-size="10" fill="#718096">Welcome bonus arms race</text>
+          <text x="125" y="132" text-anchor="middle" font-size="10" fill="#718096">Customer has existing loyalty</text>
+        </g>
+        <!-- NonStop CAC -->
+        <g transform="translate(320, 55)">
+          <rect x="0" y="0" width="250" height="140" rx="10" fill="#48bb78" opacity="0.1" stroke="#48bb78" stroke-width="1.5"/>
+          <text x="125" y="28" text-anchor="middle" font-size="10" fill="#276749" font-weight="600">NONSTOP DEBIT CAC (PROJECTED)</text>
+          <text x="125" y="72" text-anchor="middle" font-size="36" font-weight="800" fill="#276749">$20-$50</text>
+          <text x="125" y="98" text-anchor="middle" font-size="10" fill="#718096">No competing product to displace</text>
+          <text x="125" y="115" text-anchor="middle" font-size="10" fill="#718096">Customer is a loyalty blank slate</text>
+          <text x="125" y="132" text-anchor="middle" font-size="10" fill="#718096">100M+ pre-qualified via airline apps</text>
+        </g>
+      </svg>
+    </div>
+
     <h3>11.2 Highest Willingness to Pay</h3>
-    <p>The &#34;New to Rewards&#34; customer has the highest willingness to pay a monthly fee for a debit rewards product because the <strong>perceived value is highest relative to their current state</strong>. A customer who has never earned a travel point in their life will perceive significant value in earning their first 10,000 points, enough for a free domestic flight or hotel night. The existing 2025 debit cards have established pricing benchmarks: <strong>$4–$7/month</strong>, waived with a $2,000–$2,500 average balance. For a customer spending $500–$1,000/month on a debit card, earning 1x transferable points on that spend (6,000–12,000 points annually) represents <strong>$60–$120+ in travel value</strong>, a 7–15x return on a $48–$84 annual fee.</p>
+    <p>The &#34;<strong>New to Rewards</strong>&#34; customer has the highest willingness to pay a monthly fee for a debit rewards product because the <strong>perceived value is highest relative to their current state</strong>. A customer who has never earned a travel point in their life will perceive significant value in earning their first 10,000 points, enough for a free domestic flight or hotel night. The existing 2025 debit cards have established pricing benchmarks: <strong>$4–$7/month</strong>, waived with a $2,000–$2,500 average balance. For a customer spending $500–$1,000/month on a debit card, earning 1x transferable points on that spend (6,000–12,000 points annually) represents <strong>$60–$120+ in travel value</strong>, a 7–15x return on a $48–$84 annual fee.</p>
 
     <h3>11.3 Proving the Model for Segments 2 and 3</h3>
     <p>The strategic sequencing of customer segments, New to Rewards first, then Premium Customers, then B2B, is validated by the competitive environment and infrastructure development timeline. Segment 1 proves that debit-based transferable points are viable, builds the user base and transaction volume needed to negotiate favorable B2B partnerships, and generates the data required to demonstrate engagement metrics to premium customers (Segment 2) and business partners (Segment 3). The 2025 single-program debit card launches have already validated the core debit rewards thesis; NonStop Points&#39; multi-program innovation is the logical next step that the market is structurally moving toward.</p>
@@ -982,6 +1241,38 @@
 </section>
 
 <!-- SECTION 10: RISKS -->
+
+    <div style="margin: 40px auto 20px; max-width: 600px;">
+      <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; width: 100%;">
+        <text x="300" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#1a202c">Perceived Value Is Highest for First-Time Earners</text>
+        <!-- Value perception gradient -->
+        <g transform="translate(50, 55)">
+          <rect x="0" y="0" width="500" height="80" rx="8" fill="#f7fafc" stroke="#e2e8f0"/>
+          <!-- Low end -->
+          <rect x="0" y="0" width="166" height="80" rx="8" fill="#48bb78" opacity="0.2"/>
+          <text x="83" y="30" text-anchor="middle" font-size="10" fill="#276749" font-weight="600">NEVER EARNED POINTS</text>
+          <text x="83" y="52" text-anchor="middle" font-size="18" font-weight="800" fill="#276749">Highest</text>
+          <text x="83" y="70" text-anchor="middle" font-size="9" fill="#276749">willingness to pay</text>
+          <!-- Mid -->
+          <rect x="166" y="0" width="168" height="80" fill="#ed8936" opacity="0.1"/>
+          <text x="250" y="30" text-anchor="middle" font-size="10" fill="#c05621" font-weight="600">CASUAL EARNER</text>
+          <text x="250" y="52" text-anchor="middle" font-size="18" font-weight="800" fill="#c05621">Medium</text>
+          <text x="250" y="70" text-anchor="middle" font-size="9" fill="#c05621">has a basic card</text>
+          <!-- High end -->
+          <rect x="334" y="0" width="166" height="80" rx="8" fill="#e53e3e" opacity="0.08"/>
+          <text x="417" y="30" text-anchor="middle" font-size="10" fill="#c53030" font-weight="600">POWER USER</text>
+          <text x="417" y="52" text-anchor="middle" font-size="18" font-weight="800" fill="#c53030">Lowest</text>
+          <text x="417" y="70" text-anchor="middle" font-size="9" fill="#c53030">already optimized</text>
+        </g>
+        <g transform="translate(50, 150)">
+          <rect x="0" y="0" width="500" height="50" rx="8" fill="#1a365d"/>
+          <text x="250" y="20" text-anchor="middle" font-size="11" fill="#90cdf4" font-weight="600">First 10,000 points = a free flight.</text>
+          <text x="250" y="38" text-anchor="middle" font-size="11" fill="#a0aec0">For someone who has never earned a point, that's life-changing. $5/month is obvious.</text>
+        </g>
+      </svg>
+    </div>
+
+
 <section id="risks">
   <div class="container">
     <div class="section-header">
