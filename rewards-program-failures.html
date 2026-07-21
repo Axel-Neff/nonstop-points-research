@@ -1,0 +1,1034 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NonStop Points · When Rewards Programs Fail</title>
+<meta name="description" content="Structural failure patterns in consumer rewards programs, 2018 to 2026. Board research report for the NonStop Points go/no-go decision."/>
+<style>
+  :root {
+    --primary: #1a365d;
+    --primary-light: #2c5282;
+    --accent: #e53e3e;
+    --accent-orange: #ed8936;
+    --accent-teal: #319795;
+    --accent-green: #2f855a;
+    --bg: #faf9f7;
+    --bg-dark: #1a202c;
+    --text: #2d3748;
+    --text-light: #4a5568;
+    --text-muted: #718096;
+    --border: #e2e8f0;
+    --card-bg: #ffffff;
+    --gradient: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+    --gradient-warm: linear-gradient(135deg, #ed8936 0%, #e53e3e 100%);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* === COVER === */
+  .cover {
+    background: var(--gradient);
+    color: white;
+    padding: 80px 40px 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 50%;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  .cover h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .cover h1 span { color: #90cdf4; }
+  .cover-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255,255,255,0.88);
+    max-width: 700px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+  .cover-meta span { display: flex; align-items: center; gap: 8px; }
+
+  /* === NAV === */
+  .nav-bar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .nav-inner a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .nav-inner a:hover {
+    color: var(--primary);
+    background: #edf2f7;
+  }
+
+  /* === CONTAINER === */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  /* === SECTIONS === */
+  section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin: 40px 0 16px;
+  }
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 32px 0 12px;
+  }
+  p { margin-bottom: 18px; color: var(--text-light); }
+
+  /* === EXEC SUMMARY === */
+  .exec-summary {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 50px;
+    margin: -60px auto 40px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+  }
+  .exec-summary h2 { font-size: 1.5rem; margin-bottom: 20px; }
+  .exec-summary p { font-size: 1.05rem; line-height: 1.8; }
+
+  /* === STAT CARDS === */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .stat-card .number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-card .number.accent { color: var(--accent); }
+  .stat-card .number.orange { color: var(--accent-orange); }
+  .stat-card .number.teal { color: var(--accent-teal); }
+  .stat-card .label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* === HIGHLIGHT BOX === */
+  .highlight-box {
+    background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+    border-left: 4px solid var(--accent-teal);
+    padding: 24px 28px;
+    border-radius: 0 12px 12px 0;
+    margin: 28px 0;
+  }
+  .highlight-box p { margin: 0; color: var(--text); font-weight: 500; }
+  .highlight-box.accent-bg {
+    background: linear-gradient(135deg, #fff5f5 0%, #fef3e2 100%);
+    border-left-color: var(--accent-orange);
+  }
+  .highlight-box.red-bg {
+    background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 60%);
+    border-left-color: var(--accent);
+  }
+
+  /* === TABLES === */
+  .table-wrap { overflow-x: auto; margin: 24px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  thead { background: var(--primary); color: white; }
+  th { padding: 14px 16px; text-align: left; font-weight: 600; font-size: 13px; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+  tr:hover td { background: #f7fafc; }
+  tbody tr:last-child td { border-bottom: none; }
+  td strong { color: var(--text); }
+
+  /* === QUOTE === */
+  blockquote {
+    background: var(--bg);
+    border-left: 4px solid var(--primary-light);
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    color: var(--text-light);
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* === SECTION HEADER === */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .section-number {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  /* === PULL STAT === */
+  .pull-stat {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--card-bg);
+    padding: 28px 32px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin: 24px 0;
+  }
+  .pull-stat .big-num {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .pull-stat .stat-desc { color: var(--text-light); font-size: 15px; }
+
+  /* === RISK GRID === */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+  }
+  .risk-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border);
+  }
+  .risk-card h4 { margin-top: 0; color: var(--accent); }
+  .risk-card p { font-size: 14px; margin-bottom: 0; }
+
+  /* === VERDICT PILLS === */
+  .pill {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .pill.ok   { background: #c6f6d5; color: #22543d; }
+  .pill.part { background: #feebc8; color: #7b341e; }
+  .pill.bad  { background: #fed7d7; color: #822727; }
+  .pill.unv  { background: #e2e8f0; color: #4a5568; }
+
+  /* === CLAIM BLOCKS === */
+  .claim {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 24px 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .claim-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 18px 24px;
+    background: #f7fafc;
+    border-bottom: 1px solid var(--border);
+  }
+  .claim-head .q { font-weight: 700; color: var(--primary); font-size: 1.05rem; }
+  .claim-body { padding: 20px 24px 8px; }
+  .claim-body p { font-size: 15px; }
+  .correction {
+    background: #fffaf0;
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 18px;
+    margin: 0 0 18px;
+    font-size: 14px;
+  }
+  .correction .ck {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+    margin-bottom: 4px;
+  }
+  .correction p { margin: 0; color: var(--text); }
+
+  /* === IMPLICATION ROWS === */
+  .imp {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 24px 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .imp-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 24px;
+    background: #f7fafc;
+    border-bottom: 1px solid var(--border);
+  }
+  .imp-head .n {
+    width: 34px; height: 34px;
+    background: var(--gradient);
+    color: #fff;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; flex-shrink: 0;
+  }
+  .imp-head .t { font-weight: 700; color: var(--primary); }
+  .imp-cols { display: grid; grid-template-columns: 1fr 1fr; }
+  .imp-col { padding: 18px 24px; }
+  .imp-col + .imp-col { border-left: 1px solid var(--border); }
+  .imp-col .lk {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .imp-col.market .lk { color: var(--accent); }
+  .imp-col.nonstop .lk { color: var(--accent-teal); }
+  .imp-col p { font-size: 14px; margin: 0; }
+
+  /* === FRAGILITY === */
+  .frag-row {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 14px 0;
+  }
+  .frag-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .frag-top .fname { font-weight: 700; color: var(--primary); }
+  .frag-top .fname small { display: block; font-weight: 500; color: var(--text-muted); font-size: 12px; }
+  .frag-top .fscore { font-weight: 800; color: var(--accent); font-size: 14px; }
+  .frag-bar { height: 10px; border-radius: 5px; background: #edf2f7; overflow: hidden; margin: 12px 0; }
+  .frag-bar i { display: block; height: 100%; border-radius: 5px; background: var(--gradient-warm); }
+  .frag-row .fnote { font-size: 14px; color: var(--text-light); margin: 0; }
+
+  /* === SOURCES === */
+  .src-list { list-style: none; margin: 16px 0; columns: 2; column-gap: 36px; }
+  .src-list li { break-inside: avoid; margin-bottom: 10px; font-size: 14px; color: var(--text-light); }
+  .src-list a { color: var(--primary-light); text-decoration: none; font-weight: 500; }
+  .src-list a:hover { text-decoration: underline; }
+  .src-list .mono { color: var(--text-muted); font-size: 12px; }
+
+  /* === FOOTER === */
+  .footer {
+    background: var(--bg-dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 40px 30px;
+    font-size: 13px;
+  }
+  .footer a { color: #90cdf4; text-decoration: none; }
+
+  .confidential-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 24px;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .cover { padding: 50px 20px 70px; }
+    .exec-summary { padding: 30px; margin: -40px 20px 30px; }
+    .container { padding: 0 20px; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .pull-stat { flex-direction: column; text-align: center; }
+    .nav-inner { padding: 0 15px; }
+    .imp-cols { grid-template-columns: 1fr; }
+    .imp-col + .imp-col { border-left: none; border-top: 1px solid var(--border); }
+    .src-list { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-badge">Confidential · Board Research</div>
+  <h1>When Rewards Programs <span>Fail</span></h1>
+  <p class="cover-subtitle">Structural failure patterns in consumer rewards, 2018 to 2026: what the graveyard teaches, what the survivors are hiding, and what it means for the NonStop Points go/no-go decision</p>
+  <div class="cover-meta">
+    <span>📊 40+ verified sources</span>
+    <span>📅 July 2026</span>
+    <span>✈️ NonStop Points</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="#exec">Summary</a>
+    <a href="#method">Method</a>
+    <a href="#bilt">Bilt</a>
+    <a href="#applecard">Apple Card</a>
+    <a href="#graveyard">Graveyard</a>
+    <a href="#travel">Travel Loyalty</a>
+    <a href="#regulation">Regulation</a>
+    <a href="#fragility">Fragility</a>
+    <a href="#nonstop">NonStop Implications</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<!-- EXECUTIVE SUMMARY -->
+<section id="exec">
+  <div class="container">
+    <div class="exec-summary">
+      <h2>TL;DR for the Board</h2>
+      <p>Between 2018 and 2026, at least <strong>eighteen consumer rewards programs</strong> shut down, terminated their issuing partnerships, or devalued so aggressively that the original value proposition no longer exists. The failures share a small set of root causes, and none of them are exotic. <strong>Rewards funded by someone else's losses do not survive:</strong> Bilt collected fees and called itself profitable while Wells Fargo absorbed up to $10M per month; Goldman Sachs lost roughly $1.2B on Apple Card in 2022 alone while Apple kept the brand halo. The funding source is regulated: every market that capped interchange (EU, Australia, UK) saw generous rewards sharply reduced or withdrawn, and US pressure is live on three fronts. Travel programs are in a devaluation doom loop that is destroying the consumer trust incumbents spent decades building. And the VC subsidies that kept unprofitable fintech rewards alive ended with ZIRP. NonStop's bank-led debit model avoids the commercial failure modes documented here; its one concentrated risk is regulatory, and this report treats it head-on.</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="number accent">$10M/mo</div>
+        <div class="label">Wells Fargo's reported losses on the Bilt card (WSJ)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number accent">$2.2B</div>
+        <div class="label">JPMorgan's Q4 2025 provision to take over Apple Card</div>
+      </div>
+      <div class="stat-card">
+        <div class="number orange">1,300%</div>
+        <div class="label">Spike in CFPB complaints during Bilt's Feb 2026 transition</div>
+      </div>
+      <div class="stat-card">
+        <div class="number teal">18+</div>
+        <div class="label">Rewards programs shut down or terminated, 2018 to 2026</div>
+      </div>
+    </div>
+
+    <h3>The four causes of death</h3>
+    <p><strong>1. Program profit ≠ partnership profit.</strong> Bilt collected fees and called itself profitable while Wells Fargo absorbed up to $10M per month in losses. Goldman lost roughly $1.2B on Apple Card in 2022 alone while Apple kept its brand halo. When the party holding the P&amp;L exits, the program breaks. Both did.</p>
+    <p><strong>2. The funding source is regulated.</strong> US rewards run on interchange that is a global outlier. Every market that capped it saw generous rewards cards sharply reduced or withdrawn. US pressure is now live on three fronts: the CCCA, the Reg II litigation, and a proposed 10% APR cap.</p>
+    <p><strong>3. Devaluation is a doom loop.</strong> Delta, United, American, Hilton, Marriott, and Hyatt have all cut point values since 2023. Dynamic pricing made devaluation continuous and invisible. Members notice anyway, engagement falls, and the bank partners funding the miles get squeezed next.</p>
+    <p><strong>4. VC subsidies ended with ZIRP.</strong> Dosh, Shopkick, Daylight, Drop, and the coalition programs before them ran on venture capital instead of unit economics. Post-2022, that funding is gone. Programs now have to work at the transaction level or they die, usually with member balances forfeited.</p>
+  </div>
+</section>
+
+<!-- SECTION 1: METHOD -->
+<section id="method">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <h2>Method &amp; Corrections</h2>
+    </div>
+    <p>The underlying research was compiled from 100+ searches across primary sources (Senate letters, SEC filings, CFPB publications), major financial press, and specialist rewards media. Before this report was written, roughly <strong>forty load-bearing claims were re-checked against current sources</strong> by three parallel verification passes on July 20, 2026. Most held. The corrections below were applied throughout; where a claim could not be substantiated, it was cut or labeled.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Original claim</th><th>Finding</th><th>As corrected in this report</th></tr></thead>
+        <tbody>
+          <tr><td>"Bipartisan Senate Banking Committee inquiry" into Bilt</td><td><span class="pill part">Corrected</span></td><td>The May 27, 2026 letter was from <strong>Sen. Elizabeth Warren alone</strong>, as Ranking Member. Serious, but not bipartisan.</td></tr>
+          <tr><td>Bilt raised "$810M to $960M"</td><td><span class="pill part">Narrowed</span></td><td><strong>$813M</strong> total raised is the sourced figure. The $960M upper bound could not be verified.</td></tr>
+          <tr><td>UWM's $100M as separate strategic capital</td><td><span class="pill part">Clarified</span></td><td>UWM's $100M was a <strong>component of the July 2025 round</strong>, detailed publicly on Oct 14, 2025. Not incremental.</td></tr>
+          <tr><td>Goldman's "$4B total consumer losses"</td><td><span class="pill part">Labeled</span></td><td>A <strong>journalistic aggregate</strong>, not an official Goldman figure. The audited anchor is ~$1.2B lost in Platform Solutions in 2022 and an $859M net loss in 2024.</td></tr>
+          <tr><td>Sony "PlayStation Visa discontinued"</td><td><span class="pill part">Corrected</span></td><td>Sony Rewards ended Dec 31, 2024. The card itself <strong>moved to a replacement rewards program</strong>.</td></tr>
+          <tr><td>Delta "partner awards up ~60% since 2020"</td><td><span class="pill unv">Unverified</span></td><td><strong>Dropped.</strong> Replaced with the sourced record: MQD thresholds proposed up 75 to 100% in 2023, partially walked back after member revolt.</td></tr>
+          <tr><td>Barclays Aviator "discontinued Sept 30, 2025"</td><td><span class="pill part">Refined</span></td><td>Closed to new applicants <strong>as of October 2025</strong>; portfolios began converting to Citi on April 24, 2026.</td></tr>
+          <tr><td>Bilt 2.0 issuer "Cardless/Column Bank or similar"</td><td><span class="pill ok">Confirmed + precise</span></td><td>Issued by <strong>Column N.A.</strong>, serviced by Cardless. Notable for us: Column is also in NonStop's proposed stack.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      <p><strong>Reading the verdicts:</strong> <span class="pill ok">Confirmed</span> matched by two or more independent sources, at least one primary. <span class="pill part">Partially confirmed</span> directionally right, detail corrected. <span class="pill bad">Contradicted</span> the evidence points the other way. <span class="pill unv">Unverified</span> no reliable source found; excluded from any conclusion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: BILT -->
+<section id="bilt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <h2>Case Study: Bilt Rewards</h2>
+    </div>
+    <p>Bilt is the most instructive live case in consumer rewards: a program that claims profitability, raised $813M, and is valued at $10.75B, while its original issuing partner lost up to $10M a month and its replacement card economics remain unproven. Seven claims, seven verdicts.</p>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">1 · Bilt runs on structurally unprofitable card economics</span><span class="pill ok">Substantially confirmed</span></div>
+      <div class="claim-body">
+        <p>Wells Fargo, Bilt's original issuer, lost up to <strong>$10 million per month</strong> on the card per the Wall Street Journal (June 2024). The bank had projected 65% of spend would be non-rent; reality inverted to roughly 35%. Cardholders bought a coffee to hit the 5-transaction threshold, collected rent points on which Wells earned no interchange from landlords, and moved on. Wells also paid Bilt 0.8% on every rent transaction plus $200 per new account. Wells decided in 2025 to exit roughly three years before the 2029 contract end; the partnership formally terminated in February 2026.</p>
+        <p>The transition to new issuance was chaotic: a <strong>1,300% spike in CFPB complaints</strong> in February 2026, payment failures, rent posting delays of five-plus business days, and a Senate Banking letter demanding answers. At the end of February only half of members were getting responses within Bilt's own service level agreement, per the letter.</p>
+        <div class="correction"><span class="ck">Correction applied</span><p>The Senate inquiry was a letter from Ranking Member Elizabeth Warren (May 27, 2026), not a bipartisan committee action as earlier drafts stated.</p></div>
+        <h4>How the $10M/month happens: the mechanics</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Mechanic</th><th>What it meant for Wells Fargo</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Rent generates zero interchange</strong></td><td>Landlords collect via ACH and rent processors, outside card network merchant fees. Wells earned $0 on every rent transaction while still funding the points on it.</td></tr>
+              <tr><td><strong>Wells paid Bilt regardless</strong></td><td>0.8% of every rent payment plus $200 per new account. A $2,000/month renter cost Wells $16/month in Bilt fees against $0 of rent interchange, before rewards funding.</td></tr>
+              <tr><td><strong>Spend mix inverted</strong></td><td>Wells projected 65% non-rent spend to subsidize the rent side. Reality: ~35%. Cardholders made 5 tiny purchases (a coffee, a pack of gum) to unlock rent points, then put the card away. Roughly $1.50 of interchange against $16+ of cost.</td></tr>
+              <tr><td><strong>No interest income</strong></td><td>Rent is non-discretionary; Bilt cardholders paid in full. The two engines of card profitability, interchange and APR on revolving balances, both read zero.</td></tr>
+              <tr><td><strong>Rewards liability on top</strong></td><td>Wells still funded the points issued on rent. Scale the per-cardholder loss across hundreds of thousands of accounts and $10M/month is arithmetic, not scandal.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The distinction that matters: Bilt <strong>was</strong> profitable in 2023, exactly as Jain claimed, because its revenue was the 0.8% and the $200 bounties Wells was paying. The program extracted fees from the ecosystem while externalizing the card losses to its bank partner. That is why a contract running through 2029 was terminated three years early.</p>
+      </div>
+    </div>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">2 · Bilt has tightened redemption constraints over time</span><span class="pill ok">Confirmed</span></div>
+      <div class="claim-body">
+        <p>Seven distinct tightenings since January 2024, several communicated through buried terms updates or third-party interviews rather than member announcements:</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Change</th><th>Date</th><th>Impact</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Elite status thresholds doubled</strong></td><td>Jan 1, 2024</td><td>Silver 25K→50K, Gold 50K→100K, Platinum 100K→200K</td></tr>
+              <tr><td><strong>Monthly quiz discontinued</strong></td><td>~Aug 2024</td><td>~250 free points per month eliminated</td></tr>
+              <tr><td><strong>Rent Day bonus cap cut 90%</strong></td><td>Oct 1, 2024</td><td>10,000 → 1,000 bonus points per month</td></tr>
+              <tr><td><strong>Tax payments excluded from promos</strong></td><td>Oct 1, 2024</td><td>Had been ~20% of bonus cost from 0.8% of cardmembers</td></tr>
+              <tr><td><strong>Non-Bilt-card rent earning halved</strong></td><td>~2025</td><td>Visa/MC/Discover rent: 1 pt/$1 → 1 pt/$2</td></tr>
+              <tr><td><strong>Rent no longer earns automatically</strong></td><td>Feb 2026</td><td>Bilt 2.0 gates housing points behind spend requirements</td></tr>
+              <tr><td><strong>Transfer bonus capped</strong></td><td>May 2026</td><td>Rent Day transfer bonuses capped at 100K points, previously uncapped</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <blockquote>"There's no sugarcoating it, this is a significant devaluation compared to Bilt 1.0."<cite>Travels with Tech, January 18, 2026</cite></blockquote>
+      </div>
+    </div>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">3 · Bilt added card usage requirements</span><span class="pill ok">Confirmed, then replaced with stricter ones</span></div>
+      <div class="claim-body">
+        <p>The original card required 5 transactions per statement to unlock rent earning; miss it and rent paid a flat 250 points. Bilt 2.0 (launched February 7, 2026, three cards issued by <strong>Column N.A.</strong> and serviced by Cardless) scrapped the transaction count and replaced it with a spend gate that is materially more demanding: to earn 1x on housing, members must either route everyday spend equal to <strong>75% of their rent</strong> through the card, or take the "Flexible Bilt Cash" track (4% back on everyday spend, converted toward housing points). The $0-annual-fee Blue card earns nothing on rent without qualifying spend.</p>
+      </div>
+    </div>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">4 · Bilt launched a branded "V card" product</span><span class="pill bad">Contradicted</span></div>
+      <div class="claim-body">
+        <p>No such product exists. Bilt has offered standard instant virtual card numbers in mobile wallets on approval since at least 2023, and Bilt 2.0 continues the feature. The "V card" phrasing appears only in SEO spam. This claim should not be repeated in board materials.</p>
+      </div>
+    </div>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">5 · Bilt aligned with the 10% APR cap push</span><span class="pill ok">Confirmed, as marketing rather than lobbying</span></div>
+      <div class="claim-body">
+        <p>On January 9, 2026, President Trump called for a one-year 10% credit card APR cap. Five days later Bilt launched its three new cards with a <strong>10% introductory APR for 12 months</strong>. The timing was deliberate and the CEO said so. No lobbying activity was found in OpenSecrets, FEC records, or Senate disclosures. The nuance a board should hold onto: the 10% is an intro rate; after 12 months the cards revert to APRs above 20%.</p>
+        <blockquote>"If (a credit card rate cap) is going to happen, we'd rather be at the forefront... to meet the bipartisan call for a solution."<cite>Ankur Jain, CEO, via Associated Press, January 14, 2026</cite></blockquote>
+      </div>
+    </div>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">6 · Bilt prioritizes growth over profitability</span><span class="pill ok">Confirmed</span></div>
+      <div class="claim-body">
+        <p>The July 2025 raise ($250M at $10.75B, led by General Catalyst and GID) projected crossing $1B in revenue by Q1 2026 and said nothing about profitability. Jain's 2023 claim that "Bilt is profitable today and has been" described platform fee extraction from Wells Fargo while the issuer absorbed the card losses. Revenue transparency is poor: Sacra independently estimates ~$500M for 2025 against the company's $1B forward claim, a 2x gap on the most basic number a $10.75B company reports.</p>
+      </div>
+    </div>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">7 · Bilt is being positioned for exit rather than operating profit</span><span class="pill part">Partially confirmed</span></div>
+      <div class="claim-body">
+        <p>Strong circumstantial signals, no direct proof of a process. More than 85% of members now use Bilt without the card, and the company describes itself as having "evolved from a card company into the largest loyalty program for your home and neighborhood." Ken Chenault (former AmEx CEO) has chaired the board since January 2024. UWM put $100M into the July 2025 round as a strategic partner. FT Partners, a fintech M&amp;A shop, advised the raise. B2B property-manager revenue (Resident Loyalty 2.0) builds SaaS income independent of card spend. No S-1, no confirmed sale process.</p>
+        <div class="correction"><span class="ck">Correction applied</span><p>UWM's $100M was part of the July 2025 round, publicly detailed October 14, 2025. It was not additional capital on top of the $813M total raised.</p></div>
+      </div>
+    </div>
+
+    <div class="highlight-box red-bg">
+      <p><strong>Why Bilt matters for the go/no-go:</strong> Bilt proves demand: renters will change payment behavior for points on their largest monthly expense. It also proves the trap: if the rewards liability sits with a partner whose economics don't close, the program's stated profitability is an accounting choice, and the correction, when it comes, lands on members (seven tightenings in 29 months) and on the partner (Wells' exit). Any NonStop structure must be able to answer, per bank: who holds the points liability, and does their P&amp;L close without us subsidizing it?</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: APPLE CARD -->
+<section id="applecard">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <h2>Case Study: Apple Card / Goldman Sachs</h2>
+    </div>
+    <p>If the question is "which well-known issuer ran a large rewards program for years while losing money," the answer is Goldman Sachs. The Apple Card is the cleanest documented case of a premium consumer rewards product that never worked for the bank underneath it.</p>
+    <p><strong>2019:</strong> Apple Card launches with Goldman as issuer. Daily Cash rewards, no fees, titanium card. 6M+ cardholders and a ~$20B portfolio at peak.</p>
+    <p><strong>2022:</strong> Goldman's Platform Solutions unit (Apple Card + GreenSky) loses roughly <strong>$1.2B</strong> in a single year. Cumulative consumer banking losses are reported in the ~$4B range (a journalistic aggregate; the unit-level figures are the audited anchor, including an $859M net loss in 2024).</p>
+    <p><strong>2023:</strong> Goldman begins seeking an exit. Other lenders reportedly view the book as too risky and unprofitable to take at par.</p>
+    <p><strong>January 2026:</strong> JPMorgan Chase announces it will take over the portfolio, booking a <strong>$2.2B provision</strong> in Q4 2025 earnings and buying the receivables at a reported discount of more than $1B to face value. Goldman books a ~$2.5B reserve release and completes its consumer banking exit.</p>
+    <div class="pull-stat">
+      <div class="big-num">$2.2B</div>
+      <div class="stat-desc"><strong>The exit price tells you what the economics were worth.</strong> JPMorgan required a multi-billion-dollar cushion to touch a "successful" program with six million engaged members. Programs whose sponsor and risk-holder are different entities need both sides profitable, not just the one issuing press releases.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: GRAVEYARD -->
+<section id="graveyard">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <h2>The Graveyard: Eighteen Programs, Four Causes of Death</h2>
+    </div>
+    <p>Grouped by failure mode. Every row was verified against at least one dated source; rows resting on thinner evidence are marked accordingly.</p>
+
+    <h3>Issuer economics failed</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Program</th><th>What happened</th><th>Dates</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Apple Card (Goldman)</strong></td><td>~$1.2B unit loss in 2022; portfolio sold to JPMorgan with a $2.2B provision; Goldman exits consumer banking</td><td>2019 → Jan 2026</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Bilt card (Wells Fargo)</strong></td><td>Up to $10M/mo issuer losses; exit decided 2025, effective Feb 2026; 1,300% CFPB complaint spike in transition</td><td>2022 → Feb 2026</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Barclays AAdvantage Aviator</strong></td><td>Closed to new applicants Oct 2025; AA consolidated to Citi as exclusive issuer; conversions began Apr 24, 2026</td><td>Oct 2025 → Apr 2026</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Uber card (Barclays)</strong></td><td>Applications closed 2020; converted to a generic Barclays card Oct 22, 2021, four years after launch</td><td>2017 → Oct 2021</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Chase Starbucks Visa, Hotels.com Visa, Radisson Visa, Wells Fargo Propel, Barclays Arrival+</strong></td><td>Co-brand and bank travel cards discontinued as issuers culled unprofitable portfolios</td><td>2019 → 2024</td><td><span class="pill part">Medium</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>VC subsidy ended</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Program</th><th>What happened</th><th>Dates</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dosh</strong></td><td>Card-linked cashback app shut down; users given weeks to withdraw</td><td>Feb 28, 2025</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Shopkick</strong></td><td>Owner Trax Retail shut it down abruptly; unredeemed "kicks" forfeited with no warning</td><td>Mar 26, 2026</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Daylight</strong></td><td>Neobank wound down; ceased operations June 30, 2023</td><td>Jun 2023</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Simple</strong></td><td>BBVA shut the pioneer neobank and its rewards; accounts migrated during the PNC merger</td><td>2021</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Drop</strong></td><td>Pivoted away from card-linked consumer rewards</td><td>2023–2024</td><td><span class="pill part">Medium</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Coalition partner dependence</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Program</th><th>What happened</th><th>Dates</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Plenti (American Express)</strong></td><td>US coalition loyalty experiment collapsed when anchor partners left; shut July 10, 2018</td><td>2015 → Jul 2018</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Sony Rewards</strong></td><td>Program shut Dec 31, 2024; points expired. The PlayStation Visa itself moved to a replacement program</td><td>Dec 2024</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Uber Rewards</strong></td><td>Loyalty program ended Aug 31, 2022; members pushed to the paid Uber One subscription</td><td>Aug 2022</td><td><span class="pill ok">High</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Regulatory or market shock</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Program</th><th>What happened</th><th>Dates</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BlockFi Rewards Visa</strong></td><td>Chapter 11 (Nov 28, 2022) froze the program; card unusable thereafter</td><td>Nov 2022</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Binance cards</strong></td><td>Mastercard ended the partnership Aug 2023; EEA Visa card discontinued Dec 20, 2023</td><td>2023</td><td><span class="pill ok">High</span></td></tr>
+          <tr><td><strong>Crypto.com card</strong></td><td>Staking requirements raised, rewards and perks cut repeatedly</td><td>2022–2024</td><td><span class="pill part">Medium</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box accent-bg">
+      <p><strong>Who pays when a program dies: members, first and always.</strong> Sony points expired. Shopkick kicks were forfeited overnight. Dosh gave weeks to withdraw. BlockFi balances froze in bankruptcy. There is no deposit insurance for points. That fact is central to the trust argument for any new program, and it is also the strongest consumer-protection argument regulators have when they come looking.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: TRAVEL LOYALTY -->
+<section id="travel">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <h2>Travel Loyalty: The Devaluation Record, 2023 to 2026</h2>
+    </div>
+    <p>Airlines and hotels earn billions selling points to banks (Delta alone took $7.4B from American Express in 2024), then quietly reduce what those points buy. Dynamic pricing removed the award chart, which removed the accountability. The verified record:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Program</th><th>Verified changes</th><th>Dates</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Delta SkyMiles</strong></td><td>2023 proposal raised elite (MQD) thresholds up to 75 to 100% at top tiers; partially walked back after member revolt (CEO: Delta "went too far"). Sky Club access restricted and card-based visits capped. No published award chart; fully dynamic pricing.</td><td>2023 → 2025</td></tr>
+          <tr><td><strong>United MileagePlus</strong></td><td>No-notice May 2023 devaluation: own-metal transatlantic saver awards +33% (business 60K→80K); partner awards rose 39 to 47%. Excursionist Perk eliminated Aug 21, 2025. Upgrade award charts removed Nov 24, 2025; PlusPoints go dynamic in 2027.</td><td>2023 → 2025</td></tr>
+          <tr><td><strong>American AAdvantage</strong></td><td>Traditional award chart scrapped April 2023; MileSAAver and AAnytime categories eliminated; own-flight awards fully dynamic with only "starting at" price floors.</td><td>Apr 2023</td></tr>
+          <tr><td><strong>Hilton Honors</strong></td><td>Top standard-room rate went 150K → 200K (June 2025) → 250K (Sept 2025): the third devaluation in roughly ten months. One property rose 92% in under a year.</td><td>2024 → 2025</td></tr>
+          <tr><td><strong>Hyatt</strong></td><td>2026 overhaul replaced peak/off-peak with five price levels; max standard award rose 45K → 75K points. Category changes effective May 20, 2026 moved 112 hotels up and only 24 down.</td><td>2026</td></tr>
+          <tr><td><strong>Marriott Bonvoy</strong></td><td>Rolling category inflation and peak-pricing expansion since the 2022 move to dynamic pricing.</td><td>2022 → ongoing</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box accent-bg">
+      <p><strong>The doom loop, stated plainly:</strong> carriers depend on selling miles to banks for a large share of profits. Banks fund those purchases with interchange that regulators want to cut. Carriers protect margin by devaluing miles, which erodes the consumer's reason to chase them, which weakens card spend, which pressures the bank deal that funds the whole cycle. Every actor's rational move makes the system worse. For a company whose product promise is "your points are worth something," this is the industry backdrop, and it is also the opening: trust in incumbent points is falling on a documented, dated record.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: REGULATION -->
+<section id="regulation">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">6</div>
+      <h2>Regulatory Pressure: Three Live Threats</h2>
+    </div>
+    <p>US rewards exist because US interchange is a global outlier. Every jurisdiction that capped it watched rewards shrink sharply. The US now has three active fronts, and one of them directly governs NonStop's revenue line.</p>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">Reg II litigation: Corner Post v. Board of Governors</span><span class="pill bad">Rule vacated, stayed on appeal</span></div>
+      <div class="claim-body">
+        <p>On August 6, 2025, the North Dakota district court <strong>vacated Regulation II entirely</strong>, holding the Fed exceeded its statutory authority by letting covered banks recover costs Durbin does not permit. The court stayed its own ruling pending appeal. The Fed appealed to the Eighth Circuit; briefing concluded with the Fed's April 2026 reply, and oral argument had not been scheduled as of this report. The Fed's separate October 2023 proposal to cut the covered-bank cap from 21¢ to ~14.4¢ remains pending and frozen behind the litigation.</p>
+        <p><strong>Why this matters more than any other line in this report:</strong> the small-bank exemption that NonStop's model monetizes is a creature of this exact rule. A rewrite forced by the Eighth Circuit could lower covered-bank rates (widening the exempt banks' relative advantage) or trigger broader congressional action (threatening the exemption itself). The direction is genuinely uncertain. What is certain is that the legal ground under debit interchange is moving for the first time since 2011.</p>
+      </div>
+    </div>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">Credit Card Competition Act ("Durbin 2.0")</span><span class="pill part">Pending, not passed</span></div>
+      <div class="claim-body">
+        <p>Reintroduced January 13, 2026 as S.3623 / H.R.7035. A March 2026 attempt to attach it to the Senate housing bill failed. President Trump has publicly endorsed the concept, which keeps passage risk live. If enacted, credit routing mandates would compress the premium interchange that funds credit card rewards, the same mechanism that ended generous rewards in the EU (2015 caps), Australia, and the UK. NonStop's debit model is not the direct target, but the second-order effect matters: compressed credit rewards would push banks and consumers toward exactly the debit-rewards gap NonStop proposes to fill.</p>
+      </div>
+    </div>
+
+    <div class="claim">
+      <div class="claim-head"><span class="q">10% APR cap</span><span class="pill part">Political momentum, no statute</span></div>
+      <div class="claim-body">
+        <p>Trump's January 2026 call for a one-year 10% cap produced Bilt's marketing response within five days and a Warren letter to the CFPB within two weeks, but no law. A real cap would gut interest income for mass-market credit issuers and force rewards cuts across near-prime portfolios. Debit programs, which earn nothing from revolving balances by construction, are structurally indifferent to it. This is one of the few regulatory scenarios that is asymmetrically favorable to a debit-first model.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p><strong>The international precedent, precisely stated:</strong> the EU capped interchange at 0.3% credit / 0.2% debit in 2015; issuers responded with sharply reduced rewards and higher fees. Australia's RBA cuts produced the same direction. "Collapse" overstates it; "near-elimination of generous rewards cards" is the accurate phrasing, and it is bad enough. The US at roughly 2% credit interchange funds the most generous rewards ecosystem on earth, and every serious regulatory proposal moves it toward the international norm.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: FRAGILITY -->
+<section id="fragility">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">7</div>
+      <h2>Fragility Ranking: What Breaks Next</h2>
+    </div>
+
+    <div class="frag-row">
+      <div class="frag-top"><span class="fname">Fintech-sponsored card rewards<small>Bilt 2.0, Cardless-serviced programs</small></span><span class="fscore">95 / 100</span></div>
+      <div class="frag-bar"><i style="width:95%"></i></div>
+      <p class="fnote">The core model was unprofitable for a top-5 bank; it is now being run through a thinly capitalized servicer and a small issuing bank, funded by annual fees ($95/$495 tiers) untested at scale. If Bilt 2.0 economics fail, there is no obvious next issuer willing to absorb losses. Consumer backlash is already on the Senate's radar.</p>
+    </div>
+    <div class="frag-row">
+      <div class="frag-top"><span class="fname">Crypto rewards cards<small>BlockFi, Binance, Crypto.com</small></span><span class="fscore">88 / 100</span></div>
+      <div class="frag-bar"><i style="width:88%"></i></div>
+      <p class="fnote">Two of the three largest are already gone (bankruptcy, regulatory wind-down); the survivor has cut benefits repeatedly. Existential regulatory and market risk, demonstrated rather than hypothetical.</p>
+    </div>
+    <div class="frag-row">
+      <div class="frag-top"><span class="fname">Airline &amp; hotel loyalty<small>All major US programs</small></span><span class="fscore">80 / 100</span></div>
+      <div class="frag-bar"><i style="width:80%"></i></div>
+      <p class="fnote">Not at risk of shutdown; at risk of becoming worthless slowly. The doom loop (bank funding pressure → devaluation → disengagement) is running in every major program simultaneously, on a verified 2023-2026 record. Consumer trust is the casualty.</p>
+    </div>
+    <div class="frag-row">
+      <div class="frag-top"><span class="fname">Coalition / multi-partner programs<small>Plenti, Dosh, Shopkick pattern</small></span><span class="fscore">72 / 100</span></div>
+      <div class="frag-bar"><i style="width:72%"></i></div>
+      <p class="fnote">Fail when one anchor partner exits and the network unwinds. Every US attempt at scale has died. Partner concentration is the kill variable.</p>
+    </div>
+    <div class="frag-row">
+      <div class="frag-top"><span class="fname">Debit rewards<small>NonStop's category</small></span><span class="fscore">60 / 100</span></div>
+      <div class="frag-bar"><i style="width:60%"></i></div>
+      <p class="fnote">Killed at large banks by Durbin in 2011; alive only inside the sub-$10B exemption. The category's viability now rides on the Eighth Circuit's Reg II decision and on Congress leaving the exemption alone. High regulatory sensitivity, but the surviving niche has real, protected economics today (roughly 120bps of gross interchange at exempt banks per our GLG work). Fragility here is concentrated in one legal question rather than spread across a broken business model.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: NONSTOP IMPLICATIONS -->
+<section id="nonstop">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">8</div>
+      <h2>NonStop Implications: Mapping Each Failure Pattern Onto Our Model</h2>
+    </div>
+    <p>NonStop's current shape: a white-label travel rewards platform for Durbin-exempt banks, bank-led rather than consumer-fintech-led, monetizing debit interchange the bank already earns. Each row pairs a documented market failure with how our structure does or does not inherit it. This section informs the go/no-go; it does not make the call.</p>
+
+    <div class="imp">
+      <div class="imp-head"><span class="n">A</span><span class="t">Split P&amp;L (Bilt/Wells, Apple/Goldman)</span></div>
+      <div class="imp-cols">
+        <div class="imp-col market"><span class="lk">What killed them</span><p>The program owner booked fees while the issuing partner booked losses. "Profitable" programs died when the loss-holder quit.</p></div>
+        <div class="imp-col nonstop"><span class="lk">Our exposure</span><p>Structurally lower: the bank is our customer, not our subsidizer. Interchange, deposits, and rewards cost all sit in the bank's own P&amp;L, so the incentive alignment Bilt lacked is native to our model. The residual risk is honesty in the unit economics we sell: per Bekerman, ~120bps gross, ~65bps after costs, ~50bps to rewards leaves ~15bps of margin. Thin. If our per-bank model doesn't close at those numbers, we are re-creating the Bilt pattern with extra steps.</p></div>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-head"><span class="n">B</span><span class="t">Interchange regulation (Durbin, Reg II, CCCA)</span></div>
+      <div class="imp-cols">
+        <div class="imp-col market"><span class="lk">What killed them</span><p>Durbin ended large-bank debit rewards in 2011. EU/Australia/UK caps ended generous credit rewards abroad. The CCCA aims at US credit interchange next.</p></div>
+        <div class="imp-col nonstop"><span class="lk">Our exposure</span><p>This is our single largest risk and it is binary-ish: the sub-$10B exemption is the business. Corner Post has Reg II vacated and stayed at the Eighth Circuit right now. Outcomes range from favorable (covered-bank rates fall, exempt banks' advantage widens) to fatal (Congress revisits the exemption). Mitigations worth pricing before a go: contractual repricing triggers with partner banks, a credit-rail expansion path, and monitoring the docket as a standing board item. Second-order upside: CCCA passage would shrink credit rewards and push value-seeking consumers toward debit, our segment.</p></div>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-head"><span class="n">C</span><span class="t">Points liability &amp; devaluation trust collapse</span></div>
+      <div class="imp-cols">
+        <div class="imp-col market"><span class="lk">What killed them</span><p>Programs treated points as free marketing until the liability bit (airlines carry them on the balance sheet until redeemed, per Gubba), then devalued members seven times in 29 months, Bilt-style, or 250K-per-night Hilton-style.</p></div>
+        <div class="imp-col nonstop"><span class="lk">Our exposure</span><p>We inherit it twice. First, our banks will carry points liability; Gubba's data says debit breakage is only 5 to 10%, so nearly all points issued get redeemed and must be funded. Second, our redemption value depends on travel partners who are devaluing on the record above. Design consequences: fund points at issuance with conservative breakage assumptions, and anchor redemption to cash-priced travel (the Duffel path) rather than transfer partners alone, so incumbent devaluations cannot silently gut our members' balances.</p></div>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-head"><span class="n">D</span><span class="t">Partner concentration (Plenti, Sony, coalition deaths)</span></div>
+      <div class="imp-cols">
+        <div class="imp-col market"><span class="lk">What killed them</span><p>One anchor partner leaving unwound the network. Coalition programs at US scale are 0-for-everything.</p></div>
+        <div class="imp-col nonstop"><span class="lk">Our exposure</span><p>Real on both sides of our marketplace. Vendor side: Currency Alliance, Lithic, Column, and Duffel are each single points of failure in the proposed stack, and we should note that Column is simultaneously carrying Bilt 2.0, a program under Senate scrutiny. Bank side: launching with one or two banks means one churned logo is a catastrophic revenue event. A go decision should carry minimum-viable-redundancy requirements: a second sourcing path for award inventory and a pipeline rule (no single bank &gt;40% of revenue by year two).</p></div>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-head"><span class="n">E</span><span class="t">Growth-before-economics (the ZIRP graveyard)</span></div>
+      <div class="imp-cols">
+        <div class="imp-col market"><span class="lk">What killed them</span><p>Dosh, Shopkick, Daylight, and Drop spent venture money acquiring consumers for programs that lost money per transaction. The subsidy ended; so did they.</p></div>
+        <div class="imp-col nonstop"><span class="lk">Our exposure</span><p>Low by construction, and worth keeping that way. The bank-led B2B model means banks bring the distribution and the funding; our CAC is a sales cycle, not a bribe-per-download. The discipline to hold: paid POCs, revenue per bank from day one, and no reversion to consumer paid acquisition unless a bank is funding it. The moment we subsidize consumer rewards from our own balance sheet, we join the graveyard tables above.</p></div>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-head"><span class="n">F</span><span class="t">Member trust as the scarce asset</span></div>
+      <div class="imp-cols">
+        <div class="imp-col market"><span class="lk">What the record shows</span><p>Every failure ended with forfeited balances, and every surviving program has spent 2023-2026 teaching consumers that points quietly lose value. Warren's Bilt letter shows regulators now treat rewards disclosure as a consumer-protection issue.</p></div>
+        <div class="imp-col nonstop"><span class="lk">Our opportunity</span><p>The industry's failure is our positioning. A program that publishes a fixed floor value, funds liability at issuance, and puts the promise inside a regulated bank is differentiated precisely because of everything documented in this report. That claim only works if we never tighten terms the way Bilt did. Trust is a one-way door; the graveyard is full of programs that walked through it.</p></div>
+      </div>
+    </div>
+
+    <h3>The path being tested: B2B first, and why the research supports it</h3>
+    <p>As of this report, the working plan focuses on two validation tracks, both B2B, plus continued development of the Travel.AI agent as the product layer underneath them. The direct-to-consumer card model is deferred, and every failure pattern above argues for that sequencing.</p>
+
+    <h4>Track 1 · Bank-led rewards platform</h4>
+    <p>A white-label rewards solution sold to exempt banks as the validation pathway. The signal from bank conversations is consistent with the graveyard: banks are interested in rewards, and hesitant about programs that lose them money, which is precisely the Bilt/Wells and Apple/Goldman lesson. Banks asking for <strong>$2 to 3M in liquid investment</strong> to launch a program is the points-liability funding requirement showing up in diligence, exactly as the Icelandair expert described it (points sit on the balance sheet until redeemed; debit breakage is only 5 to 10%). A bank pricing that risk upfront is a feature of this model, not an obstacle: it forces the economics to be honest at signing rather than three years in.</p>
+
+    <h4>Track 2 · Warm-intro bank pipeline</h4>
+    <p>Three exempt banks in active motion. Ryan Cimo, CEO of Fraxtional.co, is making warm introductions to <strong>Lincoln Savings Bank</strong> and <strong>Austin Capital</strong>, both banks he works with closely. <strong>Five Star Bank</strong> (Rochester) came via Dan's contact at the Golisano family office; we are in direct communication with CEO Marty Birmingham's office, pitch pending. Separately, Payton's investor conversations returned a unanimous read: interest exists only for the B2B model. Nobody wanted to fund the consumer version, which matches the post-ZIRP pattern in Section 4.</p>
+
+    <h4>Product layer · Travel.AI agent</h4>
+    <p>A working AI travel agent already runs on Axel's machine today: it has planned a full trip over Telegram and produced the corresponding living travel document on Telegraph. We are commercializing this as an AI Travel Agent, with the first deployment extending Payton's existing travel concierge business. That framing is deliberate: it answers the feedback investors gave in the Makeoff.com Series A pitches, where the fundable story was an existing operator using AI to grow and scale, not a standalone demo. The tooling then becomes the de facto solution across three surfaces: <strong>(A)</strong> proprietary points, transferable and redeemable in the RoveMiles mold; <strong>(B)</strong> the premium redemption experience inside the bank rewards program, the direct answer to the trust collapse documented in Section 5; and <strong>(C)</strong> a standalone SaaS offering. Surface B compounds the B2B tracks above. Surface A should be sequenced carefully: a proprietary currency reintroduces the points-liability and compliance exposure the B2B structure deliberately pushed into partner banks, so it belongs behind bank traction unless a bank holds the liability.</p>
+
+    <h4>Distribution channel · Fiserv Banking Hub</h4>
+    <p>A third leg under evaluation: integrating through <strong>Fiserv Communicator Open / Banking Hub</strong>, the core-banking API layer that roughly 1 in 3 US financial institutions sit on. Feasibility work confirms the path is self-serve and startup-priced: free trial sandbox with instant API keys, standard OAuth2, and the domains we need for the earn side (accounts, party, transactions, card). Fiserv stays read-mostly: we pull posted debit transactions, compute earn, and run the points ledger and travel redemption entirely on our own stack. Redemption never touches Fiserv. Commercial sequence: prove the Transactions API supports earn calculation in the free sandbox now, keep the first bank deal direct (a bank can authorize us without the marketplace), then pursue AppMarket listing (~$16K validation) once a live POC exists. A listed app can be implemented by a Communicator Open bank in as little as 30 days after a Client Authorization.</p>
+    <p>The demand signal for this channel came directly from M&amp;T. It converts our pitch from "stand up a new rewards stack" (which Mary called operationally overwhelming) into "turn on something inside the platform you are already migrating to."</p>
+    <blockquote>"The attractive model is something already integrated into an existing platform, so it's a contract addendum and turn the switch on. Integration would be easier through Fiserv, or TSYS Loyalty on the credit side."<cite>Mary Rajczak, Head of Card Products, M&amp;T Bank (paraphrased from meeting notes)</cite></blockquote>
+
+    <div class="risk-grid">
+      <div class="risk-card"><h4>Fiserv risk: data granularity</h4><p>Core-posted transactions carry merchant descriptors but not necessarily MCC codes or auth-level detail. Flat per-dollar earn works from posted data; category bonuses or real-time earn alerts may need the bank's debit EFT feed as a supplement. Testable in the free sandbox in days, and it should be tested before the Five Star discovery call.</p></div>
+      <div class="risk-card"><h4>Fiserv risk: core coverage</h4><p>The trial sandbox is Premier-only; DNA, Precision, Signature, and Cleartouch banks should carry over through the normalized layer, but each core validation is where added cost appears. Confirm every target bank's core early.</p></div>
+      <div class="risk-card"><h4>Fiserv risk: the uChoose conflict</h4><p>AppMarket is curated by Fiserv, whose in-house loyalty product is uChoose. Positioned as a "rewards program," we invite friction; positioned as a travel booking and transfer-partner redemption platform, a category uChoose does not serve, we read as complementary.</p></div>
+    </div>
+
+    <h4>Compliance economics under each model</h4>
+    <p>Fraxtional.co, validated as our in-house compliance vendor, can act as named CCO. Their quote for the B2C model came in at roughly <strong>$185K per year</strong>, below what we had modeled, but it is a fixed cost the B2B structure largely avoids: operating inside a partner bank lets the program inherit portions of the bank's existing compliance processes rather than duplicating them. In the B2B model, the regulated entity, the P&amp;L, and the compliance obligation all sit in the same place: the bank. Every program in the graveyard that separated those three paid for it eventually.</p>
+
+    <h3>What the board should weigh</h3>
+    <p><strong>The bear case is regulatory, not commercial.</strong> Nothing in the graveyard says "banks won't pay for a rewards platform" or "consumers don't want travel points on debit." The failures cluster in credit economics, VC subsidies, and split P&amp;Ls, none of which our structure uses. The one failure mode we cannot design around is Congress or the Eighth Circuit repricing exempt debit interchange.</p>
+    <p><strong>The margin is thin and must be respected.</strong> ~15bps of platform margin after rewards funding leaves no room for optimistic breakage, generous launch promos, or unfunded liability. The financial model should be stress-tested at 90bps gross interchange before a go.</p>
+    <p><strong>The trust position is only available now.</strong> The devaluation record of 2023-2026 created the opening for a fixed-value, bank-held promise. If incumbents stabilize or a competitor claims the position, the differentiation decays.</p>
+    <p><strong>Conditions worth attaching to any go:</strong> signed paid POC (not a pilot letter of intent) from at least one exempt bank; interchange repricing triggers in bank contracts; liability funding policy set before first point issued; Reg II docket review as a standing board item; vendor redundancy plan for award inventory.</p>
+
+    <p class="confidential-note">Pipeline and vendor details above are board-confidential; this page is intended for board distribution.</p>
+  </div>
+</section>
+
+<!-- SECTION 9: SOURCES -->
+<section id="sources">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number">9</div>
+      <h2>Source Appendix</h2>
+    </div>
+    <p>Government and official filings first, then financial press, industry analysis, and specialist media. All URLs verified reachable during the July 20, 2026 verification pass.</p>
+
+    <h3>Government / regulatory / official</h3>
+    <ul class="src-list">
+      <li><a href="https://www.banking.senate.gov/imo/media/doc/2026.05.27%20Letter%20to%20Bilt.pdf">Sen. Warren letter to Bilt Rewards</a> <span class="mono">Senate Banking (minority) · May 27, 2026</span></li>
+      <li><a href="https://www.banking.senate.gov/newsroom/minority/warren-presses-bilt-rewards-on-mounting-consumer-harms">Warren presses Bilt on consumer harms</a> <span class="mono">Senate Banking newsroom · 2026</span></li>
+      <li><a href="https://files.consumerfinance.gov/f/documents/cfpb_credit-card-rewards_issue-spotlight_2024-05.pdf">CFPB Credit Card Rewards Issue Spotlight</a> <span class="mono">CFPB · May 2024</span></li>
+      <li><a href="https://www.congress.gov/bill/119th-congress/senate-bill/3623/text">Credit Card Competition Act, S.3623</a> <span class="mono">119th Congress · Jan 13, 2026</span></li>
+      <li><a href="https://www.cooley.com/news/insight/2025/2025-08-15-district-court-vacates-regulation-iis-debit-card-interchange-fee-standard">District court vacates Regulation II (Corner Post)</a> <span class="mono">Cooley · Aug 15, 2025</span></li>
+      <li><a href="https://bankingjournal.aba.com/2026/04/federal-reserve-files-reply-brief-in-reg-ii-appeal/">Fed files reply brief in Reg II appeal</a> <span class="mono">ABA Banking Journal · Apr 2026</span></li>
+      <li><a href="https://newsroom.hyatt.com/awardchartupdates">Hyatt award chart updates</a> <span class="mono">Hyatt newsroom · 2026</span></li>
+    </ul>
+
+    <h3>Financial press</h3>
+    <ul class="src-list">
+      <li><a href="https://www.wsj.com/finance/banking/wells-fargo-credit-card-rent-rewards-8e380852">Wells Fargo's costly bet on the Bilt card</a> <span class="mono">WSJ · Jun 16, 2024</span></li>
+      <li><a href="https://www.cnbc.com/2026/01/07/jpmorgan-apple-credit-card.html">JPMorgan takes over Apple Card, $2.2B provision</a> <span class="mono">CNBC · Jan 7, 2026</span></li>
+      <li><a href="https://www.americanbanker.com/payments/news/jpmorganchase-takes-over-apple-card-from-goldman-sachs">JPMorgan Chase takes over Apple Card</a> <span class="mono">American Banker · Jan 2026</span></li>
+      <li><a href="https://apnews.com/article/bilt-credit-card-interest-rate-cap-trump-1ffb0ffca260445858443beb3ac08eb2">Bilt's new cards feature 10% intro rate</a> <span class="mono">AP · Jan 14, 2026</span></li>
+      <li><a href="https://www.cbsnews.com/news/bilt-credit-card-10-percent-interest-rate-cap-trump/">Bilt 10% rate and the rate-cap politics</a> <span class="mono">CBS News · Jan 2026</span></li>
+      <li><a href="https://www.americanbanker.com/news/cfpb-issues-response-to-bilts-bank-transition-troubles">CFPB responds to Bilt transition troubles</a> <span class="mono">American Banker · Jun 12, 2026</span></li>
+      <li><a href="https://www.pymnts.com/credit-cards/2026/bilt-users-get-surprise-wells-fargo-cards-as-partnership-ends/">Bilt users get surprise Wells Fargo cards</a> <span class="mono">PYMNTS · Feb 2026</span></li>
+      <li><a href="https://www.cnbc.com/2023/04/05/american-airlines-frequent-flyer-award-chart-dynamic-pricing.html">AA scraps award chart for dynamic pricing</a> <span class="mono">CNBC · Apr 5, 2023</span></li>
+      <li><a href="https://www.cnbc.com/2023/08/25/mastercard-ends-binance-card-partnership.html">Mastercard ends Binance card partnership</a> <span class="mono">CNBC · Aug 25, 2023</span></li>
+      <li><a href="https://www.paymentsdive.com/news/ccca-seeks-new-path-to-passage/813789/">CCCA seeks new path to passage</a> <span class="mono">Payments Dive · Mar 2026</span></li>
+    </ul>
+
+    <h3>Industry analysis &amp; company sources</h3>
+    <ul class="src-list">
+      <li><a href="https://sacra.com/c/bilt/">Bilt Rewards company research (~$500M 2025 rev. est.)</a> <span class="mono">Sacra · Apr 2026</span></li>
+      <li><a href="https://www.businesswire.com/news/home/20250710461384/en/Bilt-Raises-$250-Million-at-$10.75-Billion-Valuation-to-Accelerate-Housing-and-Neighborhood-Commerce-Platform">Bilt raises $250M at $10.75B</a> <span class="mono">Business Wire · Jul 10, 2025</span></li>
+      <li><a href="https://newsroom.biltrewards.com/meetbiltcard2.0">Meet Bilt Card 2.0 (Column N.A. / Cardless)</a> <span class="mono">Bilt newsroom · Feb 2026</span></li>
+      <li><a href="https://newsroom.biltrewards.com/bilt-raises-250-million-at-over-10-billion-valuation">Bilt funding announcement (85% cardless stat)</a> <span class="mono">Bilt newsroom · Jul 10, 2025</span></li>
+      <li><a href="https://www.businesswire.com/news/home/20251014872511/en/UWM-and-Bilt-Announce-Groundbreaking-Partnership-to-Transform-the-Mortgage-Experience-with-Rewards-Throughout-Homeownership">UWM-Bilt partnership ($100M)</a> <span class="mono">Business Wire · Oct 14, 2025</span></li>
+      <li><a href="https://www.paymentsdive.com/news/bilts-new-cards-seek-to-fix-past-faults-rewards-credit-cards-travel-hotels-airlines/756103/">Bilt's new cards seek to fix past faults</a> <span class="mono">Payments Dive · Jul 29, 2025</span></li>
+      <li><a href="https://www.ftpartners.com/transactions/bilt250">FT Partners advisory, Bilt $250M</a> <span class="mono">FT Partners · Jul 2025</span></li>
+      <li><a href="https://www.altexsoft.com/travel-industry-news/deltas-loyalty-amex-deal-drives-2b-q3-2025-revenue/">Delta-Amex deal, ~$2B/quarter</a> <span class="mono">AltexSoft · 2025</span></li>
+      <li><a href="https://www.aciworldwide.com/blog/assessing-the-impact-of-the-mif-regulation-interchange-fee-caps">Impact of EU interchange caps</a> <span class="mono">ACI Worldwide</span></li>
+      <li><a href="https://developer.fiserv.com/product/BankingHub/docs/get-started.md?branch=main">Fiserv Banking Hub: Get Started</a> <span class="mono">developer.fiserv.com</span></li>
+      <li><a href="https://appmarket.fiservapps.com/fintech">Fiserv AppMarket for Fintechs</a> <span class="mono">appmarket.fiservapps.com</span></li>
+    </ul>
+
+    <h3>Specialist rewards media</h3>
+    <ul class="src-list">
+      <li><a href="https://onemileatatime.com/news/bilt-economics-wells-fargo-losing-money/">Bilt economics: Wells Fargo losing money</a> <span class="mono">One Mile at a Time · Jan 7, 2026</span></li>
+      <li><a href="https://onemileatatime.com/news/new-bilt-credit-card-rent-rewards-details/">Bilt 2.0 card details</a> <span class="mono">One Mile at a Time · Feb 2026</span></li>
+      <li><a href="https://frequentmiler.com/big-change-to-bilt-rent-day-double-points-only-up-to-1000-bonus-points-per-month-starts-10-1-24/">Rent Day bonus capped at 1,000 points</a> <span class="mono">Frequent Miler · Aug 2024</span></li>
+      <li><a href="https://frequentmiler.com/bilt-rewards-will-double-elite-status-thresholds-in-2024/">Bilt doubles elite thresholds</a> <span class="mono">Frequent Miler · 2024</span></li>
+      <li><a href="https://upgradedpoints.com/news/bilt-rent-day-transfer-bonus-limit/">Bilt transfer bonus cap (May 2026)</a> <span class="mono">Upgraded Points · May 2026</span></li>
+      <li><a href="https://travelswithtech.com/2026/01/15/deep-analysis-of-bilt-2-0-is-it-still-worth-it/">Deep analysis of Bilt 2.0</a> <span class="mono">Travels with Tech · Jan 18, 2026</span></li>
+      <li><a href="https://frequentmiler.com/major-united-mileage-plus-devaluation-33-increase-in-award-prices-to-from-europe/">United transatlantic devaluation</a> <span class="mono">Frequent Miler · May 2023</span></li>
+      <li><a href="https://viewfromthewing.com/uniteds-mileageplus-devaluation-say-goodbye-to-stopovers-instant-upgrades-and-upgrade-award-charts/">United kills Excursionist &amp; upgrade charts</a> <span class="mono">View from the Wing · 2025</span></li>
+      <li><a href="https://onemileatatime.com/news/delta-rolls-back-skymiles-sky-club-changes/">Delta rolls back SkyMiles changes</a> <span class="mono">One Mile at a Time · 2023</span></li>
+      <li><a href="https://frequentmiler.com/oof-another-hilton-deval-at-the-top-end-standard-award-nights-now-cost-up-to-250k-points/">Hilton standard awards hit 250K</a> <span class="mono">Frequent Miler · Sep 2025</span></li>
+      <li><a href="https://frequentmiler.com/world-of-hyatt-announces-2026-category-changes-theyre-not-pretty/">Hyatt 2026 category changes</a> <span class="mono">Frequent Miler · 2026</span></li>
+      <li><a href="https://onemileatatime.com/news/american-aadvantage-barclays-cards-transitioning-citi-discontinued/">Barclays AA cards transition to Citi</a> <span class="mono">One Mile at a Time · 2025</span></li>
+      <li><a href="https://www.doctorofcredit.com/dosh-app-shutting-down/">Dosh shutting down</a> <span class="mono">Doctor of Credit · 2025</span></li>
+      <li><a href="https://couponsinthenews.com/2026/03/30/shopkick-suddenly-shuts-down-taking-users-earnings-with-it/">Shopkick suddenly shuts down</a> <span class="mono">Coupons in the News · Mar 30, 2026</span></li>
+      <li><a href="https://www.gamespot.com/articles/sony-shutting-down-its-rewards-program-here-are-the-deadlines-for-submitting-claims/1100-6524407/">Sony Rewards shutdown deadlines</a> <span class="mono">GameSpot · 2024</span></li>
+      <li><a href="https://www.nerdwallet.com/article/credit-cards/blockfi-rewards-credit-card-unavailable-following-bankruptcy-filing">BlockFi card unusable after bankruptcy</a> <span class="mono">NerdWallet · 2022</span></li>
+      <li><a href="https://loyaltylobby.com/2022/08/14/uber-ends-its-rewards-program-effective-august-31-2022/">Uber ends its rewards program</a> <span class="mono">LoyaltyLobby · Aug 2022</span></li>
+      <li><a href="https://www.retaildive.com/news/plenti-program-to-shut-down-in-july/521604/">Plenti to shut down</a> <span class="mono">Retail Dive · 2018</span></li>
+      <li><a href="https://techcrunch.com/2023/05/22/daylight-the-lgbtq-neobank-calls-it-quits/">Daylight calls it quits</a> <span class="mono">TechCrunch · May 2023</span></li>
+      <li><a href="https://techcrunch.com/2021/01/07/bbva-says-that-it-is-shutting-down-banking-app-simple-will-transfer-users-to-bbva-usa/">BBVA shuts down Simple</a> <span class="mono">TechCrunch · Jan 2021</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="footer">
+  <p><strong>NonStop Points</strong> · When Rewards Programs Fail · Board Research Report</p>
+  <p>Radial Ventures · July 2026 · All claims independently re-verified against primary sources</p>
+  <p>Companion research: <a href="index.html">The New to Rewards Customer</a></p>
+</div>
+
+</body></html>
